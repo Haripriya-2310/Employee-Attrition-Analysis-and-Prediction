@@ -6,8 +6,8 @@
 
 # Technologies Used
 
-Python | Pandas, NumPy | Scikit-learn | Matplotlib, Seaborn | Streamlit  | Pickle  | Jupyter Notebook
+Python  |  Pandas, NumPy  |  Scikit-learn  |  Matplotlib, Seaborn  |  Streamlit   |  Pickle   |  Jupyter Notebook.
 
 # Technical Tags
 
-Machine Learning (Classification) | Data Preprocessing | Feature Engineering | Exploratory Data Analysis (EDA) | Model Evaluation (Accuracy, F1-Score, ROC-AUC) | Scikit-learn | Imbalanced Data Handling  | Streamlit Dashboard
+Machine Learning (Classification) | Data Preprocessing | Feature Engineering | Exploratory Data Analysis (EDA) | Model Evaluation (Accuracy, F1-Score, ROC-AUC) | Scikit-learn | Imbalanced Data Handling  | Streamlit Dashboard.
