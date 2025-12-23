@@ -1,6 +1,6 @@
 # Employee-Attrition-Analysis-and-Prediction
 
-# OBJECTIVE
+# Objective
 
     Build a machine learning system that predicts employee attrition, enabling HR teams to make data-driven decisions, identify at-risk employees, and improve retention strategies.The project includes EDA, preprocessing, model building, evaluation, and deployment using Streamlit.
 
