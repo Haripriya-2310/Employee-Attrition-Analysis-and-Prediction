@@ -112,7 +112,7 @@ if menu == "Employee Attrition Prediction📉":
     st.header("Employee Attrition Prediction")
 
     with st.form("attrition_form"): 
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3 = st.columns(3)
 
         with col1:
             Age = st.number_input("Age", 18, 60, 30)
@@ -152,21 +152,22 @@ if menu == "Employee Attrition Prediction📉":
 
             TotalWorkingYears = st.number_input("Total Working Years", 0, 40, 8)
             NumCompaniesWorked = st.number_input("Companies Worked", 0, 10, 2)
-
-            YearsAtCompany = st.number_input("Years at Company", 0, 40, 4)
-            YearsInCurrentRole = st.number_input("Years in Current Role", 0, 20, 2)
             YearsSinceLastPromotion = st.number_input("Years Since Last Promotion", 0, 20, 1)
-            YearsWithCurrManager = st.number_input("Years With Current Manager", 0, 20, 3)
             TrainingTimesLastYear = st.selectbox("Training Times Last Year", [0,1,2,3,4,5,6])
-
-        with col4:
-
-            JobSatisfaction = st.selectbox( "Job Satisfaction",[1, 2, 3, 4],key="job_satisfaction")
-            EnvironmentSatisfaction = st.selectbox("Environment Satisfaction",[1, 2, 3, 4],key="environment_satisfaction")
-            RelationshipSatisfaction = st.selectbox(
-                "Relationship Satisfaction",[1, 2, 3, 4],
-                key="relationship_satisfaction")
-            WorkLifeBalance = st.selectbox("Work Life Balance", [1, 2, 3, 4])
+            EngagementScore = st.number_input(
+                "Engagement Score",
+                min_value=1.0,
+                max_value=4.0,
+                value=2.75,
+                step=0.25
+            )
+            StabilityScore = st.number_input(
+                "Stability Score",
+                min_value=0.0,
+                max_value=2.0,
+                value=1.0,
+                step=0.1
+            )
             JobInvolvement = st.selectbox(
                 "Job Involvement",
                 [1, 2, 3, 4],
@@ -193,17 +194,13 @@ if menu == "Employee Attrition Prediction📉":
                 'StockOptionLevel': StockOptionLevel,
                 'TotalWorkingYears': TotalWorkingYears,
                 'NumCompaniesWorked': NumCompaniesWorked,
-                'YearsAtCompany': YearsAtCompany,
-                'YearsInCurrentRole': YearsInCurrentRole,
                 'YearsSinceLastPromotion': YearsSinceLastPromotion,
-                'YearsWithCurrManager': YearsWithCurrManager,
                 'TrainingTimesLastYear': TrainingTimesLastYear,
-                'JobSatisfaction': JobSatisfaction,
-                'EnvironmentSatisfaction': EnvironmentSatisfaction,
-                'RelationshipSatisfaction': RelationshipSatisfaction,  
-                'WorkLifeBalance': WorkLifeBalance,
+                'EngagementScore' : EngagementScore,
+                'StabilityScore': StabilityScore,
                 'JobInvolvement': JobInvolvement,               
-                'PerformanceRating': PerformanceRating
+                'PerformanceRating': PerformanceRating,
+                
     }])
 
         prediction = log_pipeline.predict(input_df)
