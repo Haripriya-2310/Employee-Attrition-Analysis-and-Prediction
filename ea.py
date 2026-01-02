@@ -4,8 +4,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pickle
 
-with open("logreg_pipeline.pkl", "rb") as f:
-    log_pipeline = pickle.load(f)
+
+with open("preprocess_att.pkl", "rb") as f:
+    preprocess = pickle.load(f)
+with open("rf_model.pkl", "rb") as f:
+    rf_model = pickle.load(f)
 
 # Page Configuration
 st.set_page_config(page_title="Employee Attrition Analysis and Prediction", layout="wide")
@@ -143,7 +146,6 @@ if menu == "Employee Attrition Prediction📉":
             OverTime = st.selectbox("Over Time", ["Yes", "No"])
             StockOptionLevel = st.selectbox("Stock Option Level", [0, 1, 2, 3])
             JobInvolvement = st.selectbox("Job Involvement", [1, 2, 3, 4])
-            RelationshipSatisfaction = st.selectbox("Relationship Satisfaction", [1, 2, 3, 4])
             DistanceFromHome = st.number_input("Distance From Home", 1, 100, 10)
             MonthlyIncome = st.number_input("Monthly Income", 1000, 50000, 5000)
             PercentSalaryHike = st.slider("Percent Salary Hike", 10, 25, 15)
@@ -203,10 +205,18 @@ if menu == "Employee Attrition Prediction📉":
                 
     }])
 
-        prediction = log_pipeline.predict(input_df)
-        prob = log_pipeline.predict_proba(input_df)[0][1]
+        # Encode input
+        input_enc = preprocess.transform(input_df)  
 
+        # Predict probability for class 1
+        prob = rf_model.predict_proba(input_enc)[0][1]
+
+        # Apply threshold
+        threshold = 0.39
+        prediction = 1 if prob > threshold else 0
+
+        # Display result
         if prediction == 1:
-            st.error(f"🔴 The employee is **likely to leave**({prob:.2f}%)")
+            st.error(f"🔴 The employee is **likely to leave** ({prob*100:.2f}%)")
         else:
-            st.success(f"🟢 The employee is **likely to stay**({100 - prob:.2f}%)")
+            st.success(f"🟢 The employee is **likely to stay** ({(1-prob)*100:.2f}%)")
